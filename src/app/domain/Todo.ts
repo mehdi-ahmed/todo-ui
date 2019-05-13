@@ -1,13 +1,13 @@
 export class Todo {
   id: number;
   description: string;
-  date: Date;
-  done: boolean;
+  targetDate: Date;
+  isDone: boolean;
 
   constructor(id, description, date, done) {
     this.id = id;
     this.description = description;
-    this.date = date;
-    this.done = done;
+    this.targetDate = date;
+    this.isDone = done;
   }
 }

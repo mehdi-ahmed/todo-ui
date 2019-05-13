@@ -1,0 +1,8 @@
+table.table td a.edit {
+  color: #FFC107;
+  cursor:pointer;
+}
+table.table td a.delete {
+  color: #E34724;
+  cursor:pointer;
+}

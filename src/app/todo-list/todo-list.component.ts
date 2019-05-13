@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {TodoDataService} from '../service/data/todo-data.service';
 import {Todo} from '../domain/Todo';
 
 @Component({
@@ -8,18 +9,36 @@ import {Todo} from '../domain/Todo';
 })
 export class TodoListComponent implements OnInit {
 
-  todoArray = [
-    new Todo(1, 'clean up the room', new Date(), false),
-    new Todo(2, 'work out', new Date(), false),
-    new Todo(3, 'read a book', new Date(), false)
-  ];
+  todos: Todo [];
+  messageDelete: string;
 
-
-
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private todoService: TodoDataService) {
   }
 
+  ngOnInit() {
+    this.getAll();
+  }
+
+  getAll() {
+    this.todoService.retrieveAllTodos('mehdi').subscribe(
+      response => {
+        this.todos = response;
+      }
+    );
+  }
+
+  editTodoItem() {
+    console.log('edit');
+  }
+
+  deleteTodoItem(id) {
+    console.log('delete');
+    this.todoService.deleteTodo('mehdi', id).subscribe(
+      response => {
+        this.todos = response;
+        this.messageDelete = 'Item deleted successfully !';
+        this.getAll();
+      }
+    );
+  }
 }

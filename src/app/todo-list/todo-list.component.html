@@ -1,24 +1,36 @@
 <app-menu></app-menu>
 <div class="container">
-<h1 class="display-3">Todo List</h1>
-<table class="table table-striped">
-  <caption>My todo list</caption>
-  <thead>
-  <tr>
-    <th>description</th>
-    <th>date</th>
-    <th>done ?</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let todo of todoArray">
-    <td>{{todo.description}}</td>
-    <td> {{ todo.date | date | uppercase }}</td>
-    <td>{{todo.done}}</td>
-  </tr>
-  </tbody>
+  <h1 class="display-3">Todo List</h1>
 
-</table>
+  <!--<div class="alert alert-success" role="alert" *ngIf="messageDelete" ng-show="messageDelete">
+    {{messageDelete}}
+  </div>-->
+  <ngb-alert *ngIf="messageDelete" type="success" (close)="messageDelete = null">{{ messageDelete }}</ngb-alert>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>description</th>
+      <th>date</th>
+      <th>done ?</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let todo of todos">
+      <td>{{todo.description}}</td>
+      <td> {{ todo.targetDate | date | uppercase }}</td>
+      <td>{{todo.done}}</td>
+      <td>
+        <a class="edit" title="Edit" (click)="editTodoItem(todo.id);"><i class="material-icons">&#xE254;</i></a>
+        <a class="delete" title="Delete" (click)="deleteTodoItem(todo.id);"><i class="material-icons">&#xE872;</i></a>
+      </td>
+    </tr>
+
+    </tbody>
+
+  </table>
 </div>
 <br>
 <br>
