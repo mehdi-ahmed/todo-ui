@@ -1,13 +1,15 @@
 export class Todo {
   id: number;
+  userName: string;
   description: string;
   targetDate: Date;
-  isDone: boolean;
+  done: boolean;
 
-  constructor(id, description, date, done) {
+  constructor(id, userName, description, date, done) {
     this.id = id;
     this.description = description;
     this.targetDate = date;
-    this.isDone = done;
+    this.done = done;
+    this.userName = userName;
   }
 }

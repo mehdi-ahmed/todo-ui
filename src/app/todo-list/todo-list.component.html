@@ -1,12 +1,10 @@
 <app-menu></app-menu>
 <div class="container">
-  <h1 class="display-3">Todo List</h1>
+  <h1>
+    <i class="fa fa-bath" aria-hidden="true"></i>Todo List
+  </h1>
 
-  <!--<div class="alert alert-success" role="alert" *ngIf="messageDelete" ng-show="messageDelete">
-    {{messageDelete}}
-  </div>-->
   <ngb-alert *ngIf="messageDelete" type="success" (close)="messageDelete = null">{{ messageDelete }}</ngb-alert>
-
 
   <table class="table table-striped">
     <thead>
@@ -23,11 +21,12 @@
       <td> {{ todo.targetDate | date | uppercase }}</td>
       <td>{{todo.done}}</td>
       <td>
-        <a class="edit" title="Edit" (click)="editTodoItem(todo.id);"><i class="material-icons">&#xE254;</i></a>
-        <a class="delete" title="Delete" (click)="deleteTodoItem(todo.id);"><i class="material-icons">&#xE872;</i></a>
+        <a class="edit" placement="left" ngbTooltip="Edit todo" title="Edit" (click)="editTodoItem(todo.id);"><i
+          class="material-icons">&#xE254;</i></a>
+        <a class="delete" placement="right" ngbTooltip="Delete todo" title="Delete"
+           (click)="deleteTodoItem(todo.id);"><i class="material-icons">&#xE872;</i></a>
       </td>
     </tr>
-
     </tbody>
 
   </table>

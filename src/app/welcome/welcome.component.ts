@@ -25,7 +25,6 @@ export class WelcomeComponent implements OnInit {
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
-    console.log('welcome message');
   }
 
   getWelcomeMessageWithParam() {
@@ -33,7 +32,6 @@ export class WelcomeComponent implements OnInit {
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
-    console.log('welcome message');
   }
 
 
@@ -46,13 +44,10 @@ export class WelcomeComponent implements OnInit {
   }
 
   handleSuccessfulResponse(response) {
-    console.log(response);
     this.welcomeMessage = response.message;
   }
 
   handleErrorResponse(error) {
-    console.log(error.error);
-    console.log(error.message);
     this.welcomeMessage = error;
     this.errorMessage = error.error.message;
   }

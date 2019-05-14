@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoDataService} from '../service/data/todo-data.service';
 import {Todo} from '../domain/Todo';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,12 +14,14 @@ export class TodoListComponent implements OnInit {
 
   todos: Todo [];
   messageDelete: string;
+  private success = new Subject<string>();
 
-  constructor(private todoService: TodoDataService) {
+  constructor(private todoService: TodoDataService, private router: Router) {
   }
 
   ngOnInit() {
     this.getAll();
+    this.alertTimerClose();
   }
 
   getAll() {
@@ -27,12 +32,12 @@ export class TodoListComponent implements OnInit {
     );
   }
 
-  editTodoItem() {
-    console.log('edit');
+  editTodoItem(id) {
+    this.router.navigate(['todos', id]);
   }
 
   deleteTodoItem(id) {
-    console.log('delete');
+    this.success.next(`${new Date()} - Message successfully changed.`);
     this.todoService.deleteTodo('mehdi', id).subscribe(
       response => {
         this.todos = response;
@@ -40,5 +45,12 @@ export class TodoListComponent implements OnInit {
         this.getAll();
       }
     );
+  }
+
+  alertTimerClose() {
+    this.success.subscribe((message) => this.messageDelete = message);
+    this.success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.messageDelete = null);
   }
 }
