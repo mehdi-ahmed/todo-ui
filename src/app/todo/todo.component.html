@@ -10,6 +10,10 @@
       <br>
     </h1>
 
+    <div class="alert alert-danger" role="alert" *ngIf="submitted && targetDate === undefined">
+      Target date must be filled!
+    </div>
+
     <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
 
       <fieldset class="form-group">
@@ -51,7 +55,6 @@
                  [(ngModel)]="targetDate"
                  [ngModelOptions]="{standalone: true}"
                  ngbDatepicker
-                 required="required"
                  minlength="5"
                  #d2="ngbDatepicker">
 
@@ -59,6 +62,8 @@
             <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
           </div>
         </div>
+
+
       </fieldset>
 
       <button id="submit" type="submit" class="btn btn-primary  mr-1">Submit</button>

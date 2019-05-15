@@ -72,7 +72,7 @@ export class TodoComponent implements OnInit {
 
     this.submitted = true;
     // stop here if form is invalid
-    if (this.editTodoForm.invalid) {
+    if (this.editTodoForm.invalid || this.targetDate === undefined) {
       return;
     }
 
