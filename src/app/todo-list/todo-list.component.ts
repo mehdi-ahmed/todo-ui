@@ -53,4 +53,8 @@ export class TodoListComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.messageDelete = null);
   }
+
+  addTodo() {
+    this.router.navigate(['todos', -1]);
+  }
 }

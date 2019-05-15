@@ -10,7 +10,7 @@
       <br>
     </h1>
 
-    <form [formGroup]="editTodoForm">
+    <form [formGroup]="editTodoForm" (ngSubmit)="onSubmit()">
 
       <fieldset class="form-group">
         <div class="form-check">
@@ -27,29 +27,42 @@
         <label for="description">Description</label>
         <input type="text"
                id="description"
+               name="description"
                formControlName="description"
-               class="form-control"
-               required>
+               class="form-control" minlength="5" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+          <div *ngIf="f.description.errors.required">Description is required</div>
+        </div>
+
       </fieldset>
+
 
       <fieldset class="form-group">
         <label for="td">Date target</label>
 
         <div class="input-group">
           <input class="form-control"
-                 id="td"
-                 placeholder="yyyy-mm-dd"
-                 formControlName="targetDate"
+                 type="text"
+                 id="targetDate"
                  name="targetDate"
-                 ngbDatepicker #d="ngbDatepicker">
+                 placeholder="yyyy-mm-dd"
+                 #c2="ngModel"
+                 [(ngModel)]="targetDate"
+                 [ngModelOptions]="{standalone: true}"
+                 ngbDatepicker
+                 required="required"
+                 minlength="5"
+                 #d2="ngbDatepicker">
 
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
           </div>
-
         </div>
       </fieldset>
-      <button type="submit" class="btn btn-success" (click)="saveTodo();">Submit</button>
+
+      <button id="submit" type="submit" class="btn btn-primary  mr-1">Submit</button>
+      <button id="cancel" type="button" class="btn btn-secondary" (click)="cancel();">Cancel</button>
 
     </form>
   </div>

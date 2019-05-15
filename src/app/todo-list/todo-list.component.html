@@ -9,6 +9,7 @@
   <table class="table table-striped">
     <thead>
     <tr>
+      <th>Id</th>
       <th>description</th>
       <th>date</th>
       <th>done ?</th>
@@ -17,6 +18,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let todo of todos">
+      <td>{{todo.id}}</td>
       <td>{{todo.description}}</td>
       <td> {{ todo.targetDate | date | uppercase }}</td>
       <td>{{todo.done}}</td>
@@ -30,6 +32,11 @@
     </tbody>
 
   </table>
+
+  <div class="row">
+    <button (click)="addTodo();" class="btn btn-success">Add</button>
+
+  </div>
 </div>
 <br>
 <br>
