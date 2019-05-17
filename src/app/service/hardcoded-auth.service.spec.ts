@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HardcodedAuthService } from './hardcoded-auth.service';
+import { HardcodedAuthServices } from './hardcoded-auth.services';
 
-describe('HardcodedAuthService', () => {
+describe('HardcodedAuthServices', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HardcodedAuthService = TestBed.get(HardcodedAuthService);
+    const service: HardcodedAuthServices = TestBed.get(HardcodedAuthServices);
     expect(service).toBeTruthy();
   });
 });

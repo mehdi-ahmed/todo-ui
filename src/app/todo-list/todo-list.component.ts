@@ -37,7 +37,7 @@ export class TodoListComponent implements OnInit {
   }
 
   deleteTodoItem(id) {
-    this.success.next(`${new Date()} - Message successfully changed.`);
+    this.success.next('Item deleted !');
     this.todoService.deleteTodo('mehdi', id).subscribe(
       response => {
         this.todos = response;

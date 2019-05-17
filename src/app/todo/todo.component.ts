@@ -44,7 +44,7 @@ export class TodoComponent implements OnInit {
           data => {
             this.editTodoForm.controls.done.setValue(data.done);
             this.editTodoForm.controls.description.setValue(data.description);
-            this.targetDate = {year: 2022, month: 12, day: 12};
+            // this.targetDate = {year: 2022, month: 12, day: 12};
             this.extractDate(data.targetDate);
           });
     } else {
