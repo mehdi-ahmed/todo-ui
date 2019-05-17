@@ -5,6 +5,8 @@ import {TodoDataService} from '../service/data/todo-data.service';
 import {DatePipe} from '@angular/common';
 import {Todo} from '../domain/Todo';
 
+// todo fix bug about date adding a year
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -44,7 +46,6 @@ export class TodoComponent implements OnInit {
           data => {
             this.editTodoForm.controls.done.setValue(data.done);
             this.editTodoForm.controls.description.setValue(data.description);
-            // this.targetDate = {year: 2022, month: 12, day: 12};
             this.extractDate(data.targetDate);
           });
     } else {
@@ -81,6 +82,7 @@ export class TodoComponent implements OnInit {
     if (this.id === -1) {
       // Create new item
       this.todo.description = this.editTodoForm.value.description;
+      this.todo.done = this.editTodoForm.value.done;
       this.todo.done = this.editTodoForm.value.done;
       this.todo.targetDate = this.convertDatePicker(this.targetDate);
       this.todo.userName = this.userName;
