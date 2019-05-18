@@ -15,6 +15,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TodoComponent} from './todo/todo.component';
 import {DatePipe} from '@angular/common';
 import {HttpInterceptorBasicAuthService} from './service/http/http-intercepter-basic-auth.service';
+import {HttpErrorInterceptor} from './service/http/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {HttpInterceptorBasicAuthService} from './service/http/http-intercepter-b
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DatePipe, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true}],
+  providers: [DatePipe, {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,8 +10,8 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
   <div class="form-label-group">
-    <input type="username" id="username" class="form-control" value="{{username}}" placeholder="User name"
-           required autofocus>
+    <input type="username" id="username" name="username" class="form-control" value="{{username}}" placeholder="User name" [(ngModel)]="username"
+           required autofocus >
     <label for="username">User Name</label>
   </div>
 
@@ -26,6 +26,6 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="handleBasicAuth();">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="handleJwtAuth();">Sign in</button>
   <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
 </form>

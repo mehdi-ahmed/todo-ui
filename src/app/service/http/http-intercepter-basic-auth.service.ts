@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {BasicAuthServices} from '../basic-auth.services';
+import {AuthService} from '../auth-services.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpInterceptorBasicAuthService implements HttpInterceptor {
 
-  constructor(private basicAuthServe: BasicAuthServices) {
+  constructor(private basicAuthServe: AuthService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {

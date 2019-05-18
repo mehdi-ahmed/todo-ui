@@ -4,6 +4,7 @@ import {Todo} from '../domain/Todo';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {AuthService} from '../service/auth-services.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,7 +17,7 @@ export class TodoListComponent implements OnInit {
   messageDelete: string;
   private success = new Subject<string>();
 
-  constructor(private todoService: TodoDataService, private router: Router) {
+  constructor(private todoService: TodoDataService, private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class TodoListComponent implements OnInit {
   }
 
   getAll() {
-    this.todoService.retrieveAllTodos('mehdi').subscribe(
+    this.todoService.retrieveAllTodos(this.authService.getAuthenticatedUser()).subscribe(
       response => {
         this.todos = response;
       }
@@ -38,7 +39,7 @@ export class TodoListComponent implements OnInit {
 
   deleteTodoItem(id) {
     this.success.next('Item deleted !');
-    this.todoService.deleteTodo('mehdi', id).subscribe(
+    this.todoService.deleteTodo(this.authService.getAuthenticatedUser(), id).subscribe(
       response => {
         this.todos = response;
         this.messageDelete = 'Item deleted successfully !';

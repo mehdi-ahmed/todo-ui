@@ -8,7 +8,7 @@
         <a class="nav-link" routerLink="/todos">Todos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/welcome/mehdi">Home</a>
+        <a class="nav-link" routerLink="/welcome/{{currentUser}}">Home</a>
       </li>
     </ul>
 
@@ -20,7 +20,7 @@
     <ul class="navbar-nav navbar-collapse justify-content-end">
 
       <li class="nav-item" *ngIf="!authService.isUserLoggedIn();">
-        <a class="nav-link" routerLink="/login" >Login</a>
+        <a class="nav-link" routerLink="/login">Login</a>
       </li>
       <li class="nav-item" *ngIf="authService.isUserLoggedIn();">
         <a class="nav-link" routerLink="/logout">Logout</a>

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TodoDataService} from '../service/data/todo-data.service';
 import {DatePipe} from '@angular/common';
 import {Todo} from '../domain/Todo';
+import {AuthService} from '../service/auth-services.service';
 
 // todo fix bug about date adding a year
 
@@ -18,7 +19,7 @@ export class TodoComponent implements OnInit {
   date: string;
   editTodoForm: FormGroup;
   todo: Todo;
-  userName: 'Mehdi';
+  userName;
   targetDate;
   submitted = false;
 
@@ -28,6 +29,7 @@ export class TodoComponent implements OnInit {
     private route: ActivatedRoute,
     private todoDataService: TodoDataService,
     private datePipe: DatePipe,
+    private authService: AuthService,
     private router: Router) {
   }
 
@@ -41,7 +43,7 @@ export class TodoComponent implements OnInit {
     this.id = +this.route.snapshot.params.id;
 
     if (this.id !== -1) {
-      this.todoDataService.retrieveTodo('mehdi', this.id)
+      this.todoDataService.retrieveTodo(this.authService.getAuthenticatedUser(), this.id)
         .subscribe(
           data => {
             this.editTodoForm.controls.done.setValue(data.done);
@@ -77,7 +79,7 @@ export class TodoComponent implements OnInit {
       return;
     }
 
-    this.userName = 'Mehdi';
+    //this.userName = 'Mehdi';
 
     if (this.id === -1) {
       // Create new item

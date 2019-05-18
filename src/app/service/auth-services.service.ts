@@ -7,7 +7,7 @@ import {API_CALLS} from '../utils/api_calls.util';
 @Injectable({
   providedIn: 'root'
 })
-export class BasicAuthServices {
+export class AuthService {
 
   AUTH_USER = 'AUTH_USER';
   AUTH_TOKEN = 'AUTH_TOKEN';
@@ -33,6 +33,21 @@ export class BasicAuthServices {
         map(
           data => {
             sessionStorage.setItem(this.AUTH_TOKEN, basicAuthHeaderString);
+            sessionStorage.setItem(this.AUTH_USER, username);
+            return data;
+          }
+        )
+      );
+  }
+
+  executeJwtAuthService(username, password) {
+
+    // @ts-ignore
+    return this.httpClient.post<any>(this.BASE_URL + API_CALLS.AUTHENTICATE, {username, password})
+      .pipe(
+        map(
+          data => {
+            sessionStorage.setItem(this.AUTH_TOKEN, 'Bearer ' + data.token);
             sessionStorage.setItem(this.AUTH_USER, username);
             return data;
           }

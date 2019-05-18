@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BasicAuthServices} from '../service/basic-auth.services';
+import {AuthService} from '../service/auth-services.service';
 
 @Component({
   selector: 'app-login',
@@ -9,26 +9,26 @@ import {BasicAuthServices} from '../service/basic-auth.services';
 })
 export class LoginComponent implements OnInit {
 
-  username = 'mehdi';
-  password = '';
+  username;
+  password;
   invalidLogin = false;
 
 
-  constructor(private router: Router, private authService: BasicAuthServices) {
+  constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit() {
     if (this.authService.isUserLoggedIn()) {
-      this.router.navigate(['welcome', this.username]);
+      this.router.navigate(['welcome', this.authService.getAuthenticatedUser()]);
     }
   }
 
-  handleBasicAuth() {
+  handleJwtAuth() {
 
-    this.authService.executeBasicAuthService(this.username, this.password)
+    this.authService.executeJwtAuthService(this.username, this.password)
       .subscribe(
         data => {
-          console.log(data)
+          console.log(data);
           this.router.navigate(['welcome', this.username]);
           this.invalidLogin = false;
         },
