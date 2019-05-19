@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseURL: 'http://localhost:8080'
+  baseURL: 'http://localhost:8080',
+  baseUrlData: 'http://localhost:8080/jpa',
+
 };
 
 /*

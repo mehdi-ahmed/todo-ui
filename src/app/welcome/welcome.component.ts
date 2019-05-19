@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WelcomeDataService} from '../service/data/welcome-data.service';
+import {AuthService} from '../service/auth-services.service';
 
 @Component({
   selector: 'app-welcome',
@@ -13,11 +14,21 @@ export class WelcomeComponent implements OnInit {
   welcomeMessage = '';
   errorMessage = '';
 
-  constructor(private route: ActivatedRoute, private welcomeDataService: WelcomeDataService) {
+  constructor(
+      private route: ActivatedRoute
+    , private router: Router
+    , private welcomeDataService: WelcomeDataService
+    , private authService: AuthService) {
   }
 
   ngOnInit() {
     this.userName = this.route.snapshot.params.name;
+
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigate(['welcome', this.authService.getAuthenticatedUser()]);
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 
   getWelcomeMessage() {

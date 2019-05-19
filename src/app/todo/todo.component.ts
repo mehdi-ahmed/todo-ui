@@ -34,6 +34,7 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userName = this.authService.getAuthenticatedUser();
 
     this.editTodoForm = this.formBuilder.group({
       description: ['', Validators.required],
@@ -79,12 +80,9 @@ export class TodoComponent implements OnInit {
       return;
     }
 
-    //this.userName = 'Mehdi';
-
     if (this.id === -1) {
       // Create new item
       this.todo.description = this.editTodoForm.value.description;
-      this.todo.done = this.editTodoForm.value.done;
       this.todo.done = this.editTodoForm.value.done;
       this.todo.targetDate = this.convertDatePicker(this.targetDate);
       this.todo.userName = this.userName;

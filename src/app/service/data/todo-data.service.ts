@@ -13,22 +13,22 @@ export class TodoDataService {
   }
 
   retrieveAllTodos(username) {
-    return this.httpClient.get<Todo[]>(API_CALLS.BASE_URL + sprintf(API_CALLS.GET_ALL_TODOS, username));
+    return this.httpClient.get<Todo[]>(API_CALLS.BASE_URL_DATA + sprintf(API_CALLS.GET_ALL_TODOS, username));
   }
 
   deleteTodo(username, id) {
-    return this.httpClient.delete<Todo[]>(API_CALLS.BASE_URL + sprintf(API_CALLS.DELETE_TODO, username, id));
+    return this.httpClient.delete<Todo[]>(API_CALLS.BASE_URL_DATA + sprintf(API_CALLS.DELETE_TODO, username, id));
   }
 
   retrieveTodo(username, id) {
-    return this.httpClient.get<Todo>(API_CALLS.BASE_URL + sprintf(API_CALLS.GET_TODO, username, id));
+    return this.httpClient.get<Todo>(API_CALLS.BASE_URL_DATA + sprintf(API_CALLS.GET_TODO, username, id));
   }
 
   updateTodo(username, id, todo) {
-    return this.httpClient.put(API_CALLS.BASE_URL + sprintf(API_CALLS.UPDATE_TODO, username, id), todo);
+    return this.httpClient.put(API_CALLS.BASE_URL_DATA + sprintf(API_CALLS.UPDATE_TODO, username, id), todo);
   }
 
   addTodo(username, todo) {
-    return this.httpClient.post<Todo>(API_CALLS.BASE_URL + sprintf(API_CALLS.ADD_TODO, username), todo);
+    return this.httpClient.post<Todo>(API_CALLS.BASE_URL_DATA + sprintf(API_CALLS.ADD_TODO, username), todo);
   }
 }

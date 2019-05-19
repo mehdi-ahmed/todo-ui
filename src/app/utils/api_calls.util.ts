@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 export const API_CALLS = {
 
   BASE_URL: environment.baseURL,
+  BASE_URL_DATA: environment.baseUrlData,
   AUTHENTICATE: '/authenticate',
   GET_ALL_TODOS: '/users/%s/todos',
   GET_TODO: '/users/%s/todos/%s',
